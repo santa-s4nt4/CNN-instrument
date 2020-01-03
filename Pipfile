@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+autopep8 = "*"
+flake8 = "*"
+
+[packages]
+numpy = "*"
+tensorflow-gpu = "==1.14.0"
+keras = "==2.2.4"
+pillow = "==6.1.0"
+scipy = "*"
+google-images-download = "*"
+
+[requires]
+python_version = "3.7"
