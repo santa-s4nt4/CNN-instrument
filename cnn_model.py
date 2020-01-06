@@ -86,3 +86,22 @@ def Build(ipshape=(32, 322, 3), num_classes=3):
                   optimizer=adam,
                   metrics=['accuracy'])
     return model
+
+
+# 学習
+def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
+    # データの整理1
+    X_TRAIN_list = []
+    Y_TRAIN_list = []
+    X_TEST_list = []
+    Y_TEST_list = []
+    target = 0
+    for filename in FileNames:
+        data = np.load(filename)  # 画像のnumpyデータを読み込み
+        trunm = data.shape[0] - tsnum
+        X_TRAIN_list += [data[i] for i in range(trunm)]  # 画像データ
+        Y_TRAIN_list += [target] * trunm  # 分類番号
+        X_TEST_list += [data[i]
+                        for i in range(trunm, trunm + tsnum)]  # 学習しない画像データ
+        Y_TEST_list += [target] * tsnum  # 学習しない分類番号
+        target += 1
