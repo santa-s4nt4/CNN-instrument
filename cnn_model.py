@@ -45,3 +45,44 @@ def PreProcess(dirname, filename, var_amount=3):
     nplist = np.array(arrlist)
     np.save(filename, nplist)
     print(">> " + directory + "から" + str(num) + "個のファイルの読み込み成功")
+
+
+# モデル構築
+def Build(ipshape=(32, 322, 3), num_classes=3):
+    model = Sequential()  # 定義
+
+    # 層1
+    model.add(Conv2D(24, 3, padding='same', input_shape=ipshape))
+    model.add(Activation('relu'))
+
+    # 層2
+    model.add(Conv2D(48, 3))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.5))
+
+    # 層3,4
+    model.add(Conv2D(96, 3, padding='same'))
+    model.add(Activation('relu'))
+
+    model.add(Conv2D(96, 3))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.5))
+
+    # 層5
+    model.add(Flatten())
+    model.add(Dense(128))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.5))
+
+    # 層6
+    model.add(Dense(num_classes))
+    model.add(Activation('softmax'))
+
+    # 構築
+    adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
+    model.compile(loss='categorical_crossentropy',
+                  optimizer=adam,
+                  metrics=['accuracy'])
+    return model
