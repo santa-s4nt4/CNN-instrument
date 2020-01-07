@@ -105,3 +105,10 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
                         for i in range(trunm, trunm + tsnum)]  # 学習しない画像データ
         Y_TEST_list += [target] * tsnum  # 学習しない分類番号
         target += 1
+
+    # データの整理2
+    X_TRAIN = np.array(X_TRAIN_list + X_TEST_list)  # 連結
+    Y_TRAIN = np.array(Y_TRAIN_list + Y_TEST_list)  # 連結
+    print(">> 学習サンプル数 : ", X_TRAIN.shape)
+    y_train = np_utils.to_categorical(Y_TRAIN, target)  # 自然数をベクトルに変換
+    valrate = tsnum * target * 1.0 / X_TRAIN.shape[0]
