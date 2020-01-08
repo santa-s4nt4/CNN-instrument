@@ -112,3 +112,18 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
     print(">> 学習サンプル数 : ", X_TRAIN.shape)
     y_train = np_utils.to_categorical(Y_TRAIN, target)  # 自然数をベクトルに変換
     valrate = tsnum * target * 1.0 / X_TRAIN.shape[0]
+
+    # 学習率の変更関数
+    class Schedule(object):
+        def __init__(self, init=0.001):  # 初期値定義
+            self.init = init
+
+        def __call__(self, epoch):  # 現在値計算
+            lr = self.init
+            for i in range(1, epoch + 1):
+                lr *= learn_schedule
+
+            return lr
+
+    def get_schedule_func(init):
+        return Schedule(init)
