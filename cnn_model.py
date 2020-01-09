@@ -127,3 +127,10 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
 
     def get_schedule_func(init):
         return Schedule(init)
+
+    # 学習準備
+    lrs = LearningRateScheduler(get_schedule_func(0.001))
+    mcp = ModelCheckpoint(filepath='best.hdf5', monitor='val_loss',
+                          verbose=1, save_best_only=True, mode='auto')
+    model = BuildCNN(ipshape=(
+        X_TRAIN.shape[1], X_TRAIN.shape[2], X_TRAIN.shape[3]), num_classes=target)
