@@ -143,3 +143,9 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
                      epoch=nb_epoch,
                      validation_split=valrate,
                      callbacks=[lrs, mcp])
+    
+    # 保存
+    json_string = model.to_json()
+    json_string += '##########' + str(ClassNames)
+    open('model.json', 'w').write(json_string)
+    model.save_weights('last.hdf5')
