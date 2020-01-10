@@ -134,3 +134,12 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
                           verbose=1, save_best_only=True, mode='auto')
     model = BuildCNN(ipshape=(
         X_TRAIN.shape[1], X_TRAIN.shape[2], X_TRAIN.shape[3]), num_classes=target)
+
+    # 学習
+    print('>> 学習開始')
+    hist = model.fit(X_TRAIN, y_train,
+                     batch_size=batch_size,
+                     verbose=1,
+                     epoch=nb_epoch,
+                     validation_split=valrate,
+                     callbacks=[lrs, mcp])
