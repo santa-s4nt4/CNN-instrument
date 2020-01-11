@@ -5,3 +5,6 @@ dataset/
 img1.npy
 img2.npy
 img3.npy
+model.json
+last.hdf5
+best.hdf5
