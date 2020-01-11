@@ -159,7 +159,7 @@ def TestProcess(imgname):
         "[", "").replace("]", "").replace("\'", "").split()
     model = model_from_json(json_strings[0])
     model.load_weights("last.hdf5")  # best.hdf5で損失最小のパラメータを仕様
-    img = load_img(imgname, target_size=(hw["height"], hw["weight"]))
+    img = load_img(imgname, target_size=(hw["height"], hw["width"]))
     TEST = img_to_array(img) / 255
 
     # 画像分類
