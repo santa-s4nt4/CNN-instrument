@@ -143,20 +143,27 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
                      epoch=nb_epoch,
                      validation_split=valrate,
                      callbacks=[lrs, mcp])
-    
+
     # 保存
     json_string = model.to_json()
     json_string += '##########' + str(ClassNames)
     open('model.json', 'w').write(json_string)
     model.save_weights('last.hdf5')
 
+
 # 試行・実験
 def TestProcess(imgname):
     # 読み込み
     modelname_text = open("model.json").read()
     json_strings = modelname_text.split('##########')
-    textlist = json_strings[1].replace("[", "").replace("]", "").replace("\'", "").split()
+    textlist = json_strings[1].replace(
+        "[", "").replace("]", "").replace("\'", "").split()
     model = model_from_json(json_strings[0])
     model.load_weights("last.hdf5")  # best.hdf5で損失最小のパラメータを仕様
     img = load_img(imgname, target_size=(hw["height"], hw["weight"]))
     TEST = img_to_array(img) / 255
+
+    # 画像分類
+    pred = model.predict(np.array([TEST]), batch_size=1, verbose=0)
+    print(">> 計算結果↓\n" + str(pred))
+    print(">> この画像は「" + textlist[np.argmax(pred)].replace(",", "") + "」です。")
