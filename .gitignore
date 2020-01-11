@@ -3,6 +3,7 @@
 downloads/
 dataset/
 models/
+tflogs/
 img1.npy
 img2.npy
 img3.npy
