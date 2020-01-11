@@ -2,6 +2,7 @@
 .vscode/
 downloads/
 dataset/
+models/
 img1.npy
 img2.npy
 img3.npy
