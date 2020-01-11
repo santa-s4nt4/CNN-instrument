@@ -94,5 +94,5 @@ for i, file in enumerate(glob.glob(predicting_dirname)):
     prob = int(predicted[0][0]*100)
     print(f'file={file}, drum?={prob}%')
 
-    if prob >= 90:
+    if prob >= 95:
         shutil.copy(file, predicted_dirname)
