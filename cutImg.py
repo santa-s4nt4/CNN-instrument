@@ -2,8 +2,8 @@ import os
 import glob
 from PIL import Image, ImageOps
 
-input_dirname = os.path.join('downloads', '*', '*')
-output_dirname = os.path.join('dataset', 'reshaped')
+input_dirname = os.path.join('downloads', 'piano', '*')
+output_dirname = os.path.join('dataset', 'reshaped_piano')
 files = glob.glob(input_dirname)
 reshaped_size = (256, 256)
 
