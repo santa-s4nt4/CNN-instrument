@@ -47,7 +47,7 @@ def PreProcess(dirname, filename, var_amount=3):
 
 
 # モデル構築
-def Build(ipshape=(32, 322, 3), num_classes=3):
+def BuildCNN(ipshape=(32, 32, 3), num_classes=3):
     model = Sequential()  # 定義
 
     # 層1
@@ -139,7 +139,7 @@ def Learning(tsnum=30, nb_epoch=50, batch_size=8, learn_schedule=0.9):
     hist = model.fit(X_TRAIN, y_train,
                      batch_size=batch_size,
                      verbose=1,
-                     epoch=nb_epoch,
+                     epochs=nb_epoch,
                      validation_split=valrate,
                      callbacks=[lrs, mcp])
 
