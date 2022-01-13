@@ -12,7 +12,7 @@ numpy = "*"
 keras = "==2.2.4"
 scipy = "*"
 google-images-download = "*"
-pillow = "==6.2.0"
+pillow = "==9.0.0"
 tensorflow-gpu = "==1.15.2"
 
 [requires]
